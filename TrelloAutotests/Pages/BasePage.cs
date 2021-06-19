@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SeleniumExtras.PageObjects;
 
 namespace TrelloAutotests.Pages
 {
-    class BasePage
+    public class BasePage
     {
+        public BasePage()
+        {
+            PageFactory.InitElements(Driver.DriverInstance, this);
+        }
     }
 }
