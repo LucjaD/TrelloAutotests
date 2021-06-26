@@ -1,16 +1,15 @@
 ﻿using NUnit.Framework;
 using TrelloAutotest.Pages;
+using TrelloAutotests.Tests;
 
-namespace TrelloAutotests.Tests
+namespace TrelloAutotest.Tests
 {
     class LoginTest : BaseTest
     {
-        private TrelloBoardPage _trelloBoardPage;
         [Test]
         public void CorrectLogin()
         {
-            _trelloBoardPage = new TrelloBoardPage();
-            Assert.IsTrue(_trelloBoardPage.IsLoginCorrect());
+            Assert.IsTrue(new TrelloBoardPage().IsLoginCorrect());
         }
     }
 }

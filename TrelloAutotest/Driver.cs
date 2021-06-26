@@ -9,19 +9,10 @@ namespace TrelloAutotests
 
         public static IWebDriver DriverInstance { get => _driver; }
 
-        public static void StartBrowser()
-        {
-            _driver = new FirefoxDriver();
-        }
+        public static void StartBrowser() => _driver = new FirefoxDriver();
 
-        public static void OpenPage(string url)
-        {
-            _driver.Url = url;
-        }
+        public static void OpenPage(string url) => _driver.Url = url;
 
-        public static void CloseBrowser()
-        {
-            _driver.Quit();
-        }
+        public static void QuitBrowser() => _driver.Quit();
     }
 }

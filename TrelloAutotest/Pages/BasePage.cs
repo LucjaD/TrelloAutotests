@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using System;
 
@@ -7,11 +8,13 @@ namespace TrelloAutotests.Pages
     public class BasePage
     {
         protected WebDriverWait Wait;
-        public BasePage()
-        {
-            PageFactory.InitElements(Driver.DriverInstance, this);
+        protected IWebDriver driver;
 
-            Wait = new WebDriverWait(Driver.DriverInstance, TimeSpan.FromSeconds(10));
+        public BasePage()
+        {            
+            driver = Driver.DriverInstance;
+            PageFactory.InitElements(driver, this);
+            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
     }
 }

@@ -6,32 +6,46 @@ namespace TrelloAutotest.Tests
 {
     class ManageBoardsTest : BaseTest
     {
-        private TrelloMainPage _trelloMainPage;
-        private TrelloCreateBoardPage _configureBoard;
-        private TrelloBoardPage _boardPage;
-        private const string _boardName = "Nowa tablica ";
+        private const string _boardName = "Nowa tablica";
 
         [Test]
         public void CreateNewBoard()
         {
-            _trelloMainPage = new TrelloMainPage();
-            _configureBoard = new TrelloCreateBoardPage();
-            _boardPage = new TrelloBoardPage();
+            var trelloMainPage = new TrelloMainPage();
+            var configureBoard = new TrelloCreateBoardPage();
+            var boardPage = new TrelloBoardPage();
 
-            _trelloMainPage.CreateNewBoard();
-            _configureBoard.CreateBoard(_boardName);
-          
-            Assert.IsTrue(_boardPage.IsUrlCorrect(_boardName));
+            trelloMainPage.CreateNewBoard();
+            configureBoard.CreateBoard(_boardName);
+            Assert.IsTrue(boardPage.IsUrlCorrect(_boardName));
+        }
+
+        [Test]
+        public void CreateNewBoardButton()
+        {
+            var trelloMainPage = new TrelloMainPage();
+            var configureBoard = new TrelloCreateBoardPage();
+            var boardPage = new TrelloBoardPage();
+
+            trelloMainPage.OpenCreateTab();
+            trelloMainPage.CreateNewBoardButton();
+            configureBoard.CreateBoard(_boardName);
+            Assert.IsTrue(boardPage.IsUrlCorrect(_boardName));
         }
 
         [Test]
         public void DeleteBoard()
         {
-            _trelloMainPage = new TrelloMainPage();
-            _boardPage = new TrelloBoardPage();
+            var trelloMainPage = new TrelloMainPage();
+            var boardPage = new TrelloBoardPage();
+            var configureBoard = new TrelloCreateBoardPage();
+            var confirmDeleteBoard = new TrelloConfirmDeletePage();
 
-            _trelloMainPage.OpenBoard("Tablica do usunięcia");
-            _boardPage.DeleteBoard();
+            trelloMainPage.CreateNewBoard();
+            configureBoard.CreateBoard("Tablica do usunięcia");
+            boardPage.DeleteBoard();
+            confirmDeleteBoard.ConfirmDelete();
+            Assert.IsTrue(confirmDeleteBoard.IsBoardDeleted());
         }
     }
 }

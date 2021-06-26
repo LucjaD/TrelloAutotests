@@ -1,30 +1,30 @@
 ﻿using NUnit.Framework;
+using TrelloAutotest;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotests.Tests
 {
     public class BaseTest
-    {
-        private TrelloLoginPage _trelloLoginPage;
+    {        
         public TrelloWelcomePage TrelloWelcomePage;
-        private const string _userName = "dybek571@gmail.com";
-        private const string _password = "szkola11";
-
+        private TrelloLoginPage _trelloLoginPage;
+ 
         [SetUp]
         public void SetUp()
         {
             Driver.StartBrowser();
+
             TrelloWelcomePage = new TrelloWelcomePage();
             TrelloWelcomePage.LoginButton.Click();
 
             _trelloLoginPage = new TrelloLoginPage();
-            _trelloLoginPage.Login(new User(_userName, _password));
+            _trelloLoginPage.Login(Users.CorrectTestUser);
         }
 
         [TearDown]
         public void TearDown()
         {
-            Driver.CloseBrowser();
+            Driver.QuitBrowser();
         }
     }
 }
