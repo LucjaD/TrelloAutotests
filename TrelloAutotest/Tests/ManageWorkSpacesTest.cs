@@ -7,8 +7,6 @@ namespace TrelloAutotest.Tests
 {
     class ManageWorkSpacesTest : BaseTest
     {
-       // private const string _workSpaceName = "Nowa przestrzeń robocza";
-
         [Test]
         public void CreateWorkSpace()
         {

@@ -1,31 +1,32 @@
 ﻿using OpenQA.Selenium;
 using System.Linq;
+using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
+    using Selectors = ListConst;
+
     class TrelloListPage : BasePage
     {
         public void CreateList(string listName)
         {
-            driver.FindElement(By.XPath("//span[contains(text(), 'Dodaj ') and contains(text(), 'listę')]")).Click();
-            driver.FindElement(By.XPath("//input[@placeholder = 'Wprowadź tytuł listy']")).SendKeys(listName);
-            driver.FindElement(By.ClassName("mod-list-add-button")).Click();
+            driver.FindElement(By.XPath(Selectors.CreateList)).Click();
+            driver.FindElement(By.XPath(Selectors.ListNameInput)).SendKeys(listName);
+            driver.FindElement(By.ClassName(Selectors.AddListButton)).Click();
         }
 
-        public bool IsListCreated() => driver.FindElement(By.ClassName("js-list-content")).Displayed;
+        public bool IsListCreated(string listName) => driver.FindElements(By.ClassName(Selectors.ListHeaderName)).Any(x => x.Text.Contains(listName));
 
-        public bool IsListDeleted(string listName) => driver.FindElements(By.ClassName("list-header-name")).Any(x => x.Text.Contains(listName));
+        public bool IsListDeleted(string listName) => driver.FindElements(By.ClassName(Selectors.ListHeaderName)).Any(x => x.Text.Contains(listName));
 
-        public void DeleteList()
+        public void DeleteList(string listName)
         {
-            var ListsCollection = driver.FindElements(By.ClassName("js-list-content"));
-
-            driver.FindElements(By.CssSelector(".list-header "))
-                .First(x => x.Text.Contains("Lista do usunięcia"))
-                .FindElement(By.CssSelector("[aria-label='Akcje listy']"))
+            driver.FindElements(By.CssSelector(Selectors.ListHeader))
+                .First(x => x.Text.Contains(listName))
+                .FindElement(By.CssSelector(Selectors.ListActions))
                 .Click();
-            driver.FindElement(By.XPath("//a[contains(text(),'Zarchiwizuj tę listę')]")).Click();
+            driver.FindElement(By.XPath(Selectors.ListArchive)).Click();
         }
     }
 }

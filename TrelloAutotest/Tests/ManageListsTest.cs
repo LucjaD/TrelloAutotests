@@ -19,7 +19,7 @@ namespace TrelloAutotest.Tests
             _trelloMainPage.OpenBoard("Tablica do listy");
             _trelloListPage.CreateList(_listName);
 
-            Assert.IsTrue(_trelloListPage.IsListCreated());
+            Assert.IsTrue(_trelloListPage.IsListCreated(_listName));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace TrelloAutotest.Tests
 
             _trelloMainPage.OpenBoard("Tablica do listy");
             _trelloListPage.CreateList("Lista do usunięcia");
-            _trelloListPage.DeleteList();
+            _trelloListPage.DeleteList("Lista do usunięcia");
 
             Assert.IsFalse(_trelloListPage.IsListDeleted("Lista do usunięcia"));
         }

@@ -4,22 +4,22 @@ using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
+    using Selectors = Selectors.BoardConst;
+    using BaseSelectors = Selectors.BaseConst;
+
     public class TrelloBoardPage : BasePage
     {
-        public TrelloBoardPage() => Wait.Until(d => driver.FindElements(By.ClassName("boards-page-section-header-name")).Any());
+        public TrelloBoardPage() => Wait.Until(d => driver.FindElements(By.ClassName(Selectors.BoardHeader)).Any());
 
-        public void CreateNewList() => driver.FindElement(By.XPath("//span[contains(text(),'Dodaj listę')]")).Click();
-        
         public string TrimUrl(string Url) => Url.Split('/').Last();
 
         public void OpenBoardMenu() => driver.FindElements(By.TagName("a")).First(x => x.Text.Contains("Pokaż menu")).Click();
         
-        public bool IsLoginCorrect() => driver.FindElements(By.ClassName("boards-page-section-header-name")).Any(); ;
+        public bool IsLoginCorrect() => driver.FindElements(By.ClassName(Selectors.BoardHeader)).Any(); 
 
         public bool IsUrlCorrect(string BoardName)
         {
             Wait.Until(d => driver.FindElements(By.Id("board")).Any());
-
 
             var SplitName = BoardName.Contains(' ') ? BoardName.ToLower().Replace(' ', '-').TrimEnd('-') : BoardName.ToLower();
             var url = TrimUrl(driver.Url);
@@ -31,10 +31,10 @@ namespace TrelloAutotest.Pages
         {
             OpenBoardMenu();
 
-            var tak = driver.FindElement(By.ClassName("board-menu-navigation"));
-            tak.FindElement(By.ClassName("js-open-more")).Click();
-            driver.FindElement(By.ClassName("js-close-board")).Click();
-            driver.FindElement(By.ClassName("js-confirm")).Click();
+            var tak = driver.FindElement(By.ClassName(Selectors.BoardMenu));
+            tak.FindElement(By.ClassName(Selectors.BoardMenuMore)).Click();
+            driver.FindElement(By.ClassName(Selectors.BoardCloseBoard)).Click();
+            driver.FindElement(By.ClassName(BaseSelectors.ConfirmButton)).Click();
         }
     }
 }
