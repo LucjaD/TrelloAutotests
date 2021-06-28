@@ -12,12 +12,12 @@ namespace TrelloAutotest.Pages
     {
         public void CreateBoard(string BoardName)
         {
-            Wait.Until(d => Driver.DriverInstance.FindElements(By.XPath(Selectors.BoardTitleInput)).Any());
+            Wait.Until(d => Driver.DriverInstance.FindElements(Selectors.BoardTitleInput).Any());
 
             var driver = Driver.DriverInstance;
 
-            driver.FindElement(By.XPath(Selectors.BoardTitleInput)).SendKeys(BoardName);
-            driver.FindElement(By.XPath(Selectors.BoardCreateButton)).Click();
+            driver.FindElement(Selectors.BoardTitleInput).SendKeys(BoardName);
+            driver.FindElement(Selectors.BoardCreateButton).Click();
         }
     }
 }

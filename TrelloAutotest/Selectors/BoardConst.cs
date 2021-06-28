@@ -1,14 +1,16 @@
-﻿namespace TrelloAutotest.Selectors
+﻿using OpenQA.Selenium;
+
+namespace TrelloAutotest.Selectors
 {
     public static class BoardConst 
     {
-        public const string BoardHeader = "boards-page-section-header-name";
-        public const string BoardMenu = "board-menu-navigation";
-        public const string BoardMenuMore = "js-open-more";
-        public const string BoardCloseBoard = "js-close-board";
+        public static By BoardHeader = By.ClassName("boards-page-section-header-name");
+        public static By BoardMenu = By.ClassName("board-menu-navigation");
+        public static By BoardMenuMore = By.ClassName("js-open-more");
+        public static By BoardCloseBoard = By.ClassName("js-close-board");
 
-        public const string BoardTitleInput = "//input[@data-test-id='create-board-title-input']";
-        public const string BoardCreateButton = "//button[@data-test-id='create-board-submit-button']";
+        public static By BoardTitleInput = By.XPath("//input[@data-test-id='create-board-title-input']");
+        public static By BoardCreateButton = By.XPath("//button[@data-test-id='create-board-submit-button']");
 
     }
 }

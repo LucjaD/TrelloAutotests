@@ -1,15 +1,17 @@
-﻿namespace TrelloAutotest.Selectors
+﻿using OpenQA.Selenium;
+
+namespace TrelloAutotest.Selectors
 {
     public static class ListConst
     {
-        public const string CreateList = "//span[contains(text(), 'Dodaj ') and contains(text(), 'listę')]";
-        public const string ListNameInput = "//input[@placeholder = 'Wprowadź tytuł listy']";
-        public const string AddListButton = "mod-list-add-button";
+        public static By CreateList = By.XPath("//span[contains(text(), 'Dodaj ') and contains(text(), 'listę')]");
+        public static By ListNameInput = By.XPath("//input[@placeholder = 'Wprowadź tytuł listy']");
+        public static By AddListButton = By.ClassName("mod-list-add-button");
 
-        public const string ListHeaderName = "list-header-name";
+        public static By ListHeaderName = By.ClassName("list-header-name");
 
-        public const string ListHeader = ".list-header ";
-        public const string ListActions = "[aria-label='Akcje listy']";
-        public const string ListArchive = "//a[contains(text(),'Zarchiwizuj tę listę')]";
+        public static By ListHeader = By.CssSelector(".list-header ");
+        public static By ListActions = By.CssSelector("[aria-label='Akcje listy']");
+        public static By ListArchive = By.XPath("//a[contains(text(),'Zarchiwizuj tę listę')]");
     }
 }

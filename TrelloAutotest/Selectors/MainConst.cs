@@ -1,19 +1,22 @@
-﻿namespace TrelloAutotest.Selectors
+﻿using OpenQA.Selenium;
+
+namespace TrelloAutotest.Selectors
 {
     public static class MainConst
     {
-        public const string AddBoardPanel = "mod-add";
+        public static By AddBoardPanel = By.ClassName("mod-add");
 
-        public const string AddBoardButton = "//span[contains(text(),'Utwórz tablicę')]";
+        public static By AddBoardButton = By.XPath("//span[contains(text(),'Utwórz tablicę')]");
 
-        public const string CreateWorkSpace = "//span[contains(text(),'Utwórz przestrzeń roboczą')]";
+        public static By CreateWorkSpace = By.XPath("//span[contains(text(),'Utwórz przestrzeń roboczą')]");
 
-        public static string OpenBoard(string boardName) => $"//div[@title = '{boardName}']";
+        public static By OpenBoard(string boardName) => By.XPath($"//div[@title = '{boardName}']");
 
-        public const string SearchIcon = "//span[@aria-label = 'SearchIcon']";
-        public const string SearchInput = "input[data-test-id='header-search-input']";
-        public const string SearchResult = "[data-test-id = 'header-search-popover']";
+        public static By SearchIcon = By.XPath("//span[@aria-label = 'SearchIcon']");
+        public static By SearchInput = By.CssSelector("input[data-test-id='header-search-input']");
+        public static By SearchResult = By.CssSelector("[data-test-id = 'header-search-popover']");
+        public static By SpecificSearchResult = By.CssSelector("[data-test-id = 'header-search-popover'] a[title]");
 
-        public const string CreateTab = "//button[@aria-label = 'Utwórz tablicę lub Przestrzeń roboczą']";
+        public static By CreateTab = By.XPath("//button[@aria-label = 'Utwórz tablicę lub Przestrzeń roboczą']");
     }
 }

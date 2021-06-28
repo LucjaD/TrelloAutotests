@@ -9,40 +9,40 @@ namespace TrelloAutotest.Pages
 
     class TrelloMainPage : BasePage
     {
-        public TrelloMainPage() => Wait.Until(d => driver.FindElements(By.ClassName(Selectors.AddBoardPanel)).Any());
+        public TrelloMainPage() => Wait.Until(d => driver.FindElements(Selectors.AddBoardPanel).Any());
       
-        public void CreateNewBoard() => driver.FindElement(By.ClassName(Selectors.AddBoardPanel)).Click();
+        public void CreateNewBoard() => driver.FindElement(Selectors.AddBoardPanel).Click();
         
         public void CreateNewBoardButton()
         {
-            Wait.Until(d => driver.FindElements(By.XPath(Selectors.AddBoardButton)).Any());
+            Wait.Until(d => driver.FindElements(Selectors.AddBoardButton).Any());
 
-            driver.FindElement(By.XPath(Selectors.AddBoardButton)).Click();
+            driver.FindElement(Selectors.AddBoardButton).Click();
         }
 
         public void CreateWorkSpace()
         {
-            Wait.Until(d => driver.FindElements(By.XPath(Selectors.CreateWorkSpace)).Any());
+            Wait.Until(d => driver.FindElements(Selectors.CreateWorkSpace).Any());
 
-            driver.FindElement(By.XPath(Selectors.CreateWorkSpace)).Click();
+            driver.FindElement(Selectors.CreateWorkSpace).Click();
         }
         
         public void OpenBoard(string boardName)
         {
-            driver.FindElement(By.XPath(Selectors.OpenBoard(boardName))).Click();
+            driver.FindElement(Selectors.OpenBoard(boardName)).Click();
         }
 
         public void Search(string boardName)
         {
-            driver.FindElement(By.XPath(Selectors.SearchIcon)).Click();
-            Wait.Until(d => driver.FindElements(By.CssSelector(Selectors.SearchInput))).Any();
-            driver.FindElement(By.CssSelector(Selectors.SearchInput)).SendKeys(boardName);
+            driver.FindElement(Selectors.SearchIcon).Click();
+            Wait.Until(d => driver.FindElements(Selectors.SearchInput)).Any();
+            driver.FindElement(Selectors.SearchInput).SendKeys(boardName);
 
-            Wait.Until(d => driver.FindElements(By.CssSelector(Selectors.SearchResult)).Any());
-            driver.FindElements(By.CssSelector(Selectors.SearchResult + " a[title]"))
+            Wait.Until(d => driver.FindElements(Selectors.SearchResult).Any());
+            driver.FindElements(Selectors.SpecificSearchResult)
                 .First(x =>x.Text.Contains(boardName)).Click();
         }
 
-        public void OpenCreateTab() => driver.FindElement(By.XPath(Selectors.CreateTab)).Click();
+        public void OpenCreateTab() => driver.FindElement(Selectors.CreateTab).Click();
     }
 }

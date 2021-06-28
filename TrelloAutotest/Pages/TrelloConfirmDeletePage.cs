@@ -11,7 +11,7 @@ namespace TrelloAutotest.Pages
         public void ConfirmDelete()
         {
             driver.FindElement(By.ClassName("js-delete")).Click();
-            driver.FindElement(By.ClassName(BaseSelectors.ConfirmButton)).Click();
+            driver.FindElement(BaseSelectors.ConfirmButton).Click();
         }
 
         public bool IsBoardDeleted() => driver.FindElements(By.ClassName("js-react-root")).Any(x => x.Text.Contains("Tablicy nie znaleziono."));

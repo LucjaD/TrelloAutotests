@@ -11,22 +11,22 @@ namespace TrelloAutotest.Pages
     {
         public void CreateList(string listName)
         {
-            driver.FindElement(By.XPath(Selectors.CreateList)).Click();
-            driver.FindElement(By.XPath(Selectors.ListNameInput)).SendKeys(listName);
-            driver.FindElement(By.ClassName(Selectors.AddListButton)).Click();
+            driver.FindElement(Selectors.CreateList).Click();
+            driver.FindElement(Selectors.ListNameInput).SendKeys(listName);
+            driver.FindElement(Selectors.AddListButton).Click();
         }
 
-        public bool IsListCreated(string listName) => driver.FindElements(By.ClassName(Selectors.ListHeaderName)).Any(x => x.Text.Contains(listName));
+        public bool IsListCreated(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
 
-        public bool IsListDeleted(string listName) => driver.FindElements(By.ClassName(Selectors.ListHeaderName)).Any(x => x.Text.Contains(listName));
+        public bool IsListDeleted(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
 
         public void DeleteList(string listName)
         {
-            driver.FindElements(By.CssSelector(Selectors.ListHeader))
+            driver.FindElements(Selectors.ListHeader)
                 .First(x => x.Text.Contains(listName))
-                .FindElement(By.CssSelector(Selectors.ListActions))
+                .FindElement(Selectors.ListActions)
                 .Click();
-            driver.FindElement(By.XPath(Selectors.ListArchive)).Click();
+            driver.FindElement(Selectors.ListArchive).Click();
         }
     }
 }

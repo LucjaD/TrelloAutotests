@@ -13,40 +13,40 @@ namespace TrelloAutotest.Pages
     {
         public void CreateNewWorkSpace(string element, string workSpaceName)
         {
-            Wait.Until(d => driver.FindElements(By.CssSelector(Selectors.WorkSpaceNameInput)).Any());
+            Wait.Until(d => driver.FindElements(Selectors.WorkSpaceNameInput).Any());
 
-            driver.FindElement(By.CssSelector(Selectors.WorkSpaceNameInput)).SendKeys(workSpaceName);
-            driver.FindElement(By.XPath(Selectors.WorkSpaceTypeDropdown)).Click();
-            driver.FindElement(By.CssSelector(Selectors.WorkSpaceTypeSelect(element))).Click();
-            driver.FindElement(By.XPath(Selectors.WorkSpaceDescriptionInput)).SendKeys("Tu się dzieją rzeczy");
-            driver.FindElement(By.XPath(Selectors.WorkSpaceContinueButton)).Click();
-            driver.FindElement(By.XPath(Selectors.WorkSpaceLaterButton)).Click();
+            driver.FindElement(Selectors.WorkSpaceNameInput).SendKeys(workSpaceName);
+            driver.FindElement(Selectors.WorkSpaceTypeDropdown).Click();
+            driver.FindElement(Selectors.WorkSpaceTypeSelect(element)).Click();
+            driver.FindElement(Selectors.WorkSpaceDescriptionInput).SendKeys("Tu się dzieją rzeczy");
+            driver.FindElement(Selectors.WorkSpaceContinueButton).Click();
+            driver.FindElement(Selectors.WorkSpaceLaterButton).Click();
         }
 
         public bool IsWorkSpaceCreated(string workSpaceName)
         {
-            Wait.Until(d => driver.FindElements(By.XPath(Selectors.WorkSpaceCreated(workSpaceName))).Any());
+            Wait.Until(d => driver.FindElements(Selectors.WorkSpaceCreated(workSpaceName)).Any());
 
-            return driver.FindElements(By.XPath(Selectors.WorkSpaceCreated(workSpaceName))).Any();
+            return driver.FindElements(Selectors.WorkSpaceCreated(workSpaceName)).Any();
         }
 
         public void DeleteWorkSpace(string workSpaceName)
         {
-            driver.FindElement(By.CssSelector(Selectors.HouseIcon)).Click();
-            Wait.Until(d => driver.FindElements(By.CssSelector(Selectors.WorkSpaceTab)).Any());
+            driver.FindElement(Selectors.HouseIcon).Click();
+            Wait.Until(d => driver.FindElements(Selectors.WorkSpaceTab).Any());
 
-            var workSpaceList = driver.FindElements(By.CssSelector(Selectors.WorkSpaceTab))
+            var workSpaceList = driver.FindElements(Selectors.WorkSpaceTab)
                 .FirstOrDefault(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
-            workSpaceList.FindElement(By.CssSelector(Selectors.WorkSpaceSettings)).Click();
+            workSpaceList.FindElement(Selectors.WorkSpaceSettings).Click();
 
-            Wait.Until(d => driver.FindElements(By.ClassName(Selectors.WorkSpaceName))
+            Wait.Until(d => driver.FindElements(Selectors.WorkSpaceName)
             .Any(x => x.Text.Contains(workSpaceName)));
 
-            driver.FindElement(By.ClassName(Selectors.WorkSpaceDeleteButton)).Click();
-            driver.FindElement(By.ClassName(BaseSelectors.ConfirmButton)).Click();
+            driver.FindElement(Selectors.WorkSpaceDeleteButton).Click();
+            driver.FindElement(BaseSelectors.ConfirmButton).Click();
         }
 
-        public bool IsWorkSpaceDeleted(string workSpaceName) => driver.FindElements(By.CssSelector(Selectors.WorkSpaceDeleted))
+        public bool IsWorkSpaceDeleted(string workSpaceName) => driver.FindElements(Selectors.WorkSpaceDeleted)
                 .Any(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
     }
 }

@@ -1,8 +1,9 @@
-﻿namespace TrelloAutotest.Selectors
+﻿using OpenQA.Selenium;
+
+namespace TrelloAutotest.Selectors
 {
     public static class BaseConst
     {
-        public const string ConfirmButton = "js-confirm";
-
+        public static By ConfirmButton = By.ClassName("js-confirm");
     }
 }
