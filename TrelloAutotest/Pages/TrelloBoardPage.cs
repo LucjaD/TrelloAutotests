@@ -31,8 +31,8 @@ namespace TrelloAutotest.Pages
         {
             OpenBoardMenu();
 
-            var tak = driver.FindElement(Selectors.BoardMenu);
-            tak.FindElement(Selectors.BoardMenuMore).Click();
+            var MenuPanel = driver.FindElement(Selectors.BoardMenu);
+            MenuPanel.FindElement(Selectors.BoardMenuMore).Click();
             driver.FindElement(Selectors.BoardCloseBoard).Click();
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
         }

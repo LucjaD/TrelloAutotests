@@ -32,7 +32,7 @@ namespace TrelloAutotest.Tests
             _trelloListPage.CreateList("Lista do usunięcia");
             _trelloListPage.DeleteList("Lista do usunięcia");
 
-            Assert.IsFalse(_trelloListPage.IsListDeleted("Lista do usunięcia"));
+            Assert.IsFalse(_trelloListPage.IsListCreated("Lista do usunięcia"));
         }
     }
 }

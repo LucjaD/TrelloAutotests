@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using System.Linq;
+﻿using System.Linq;
 using TrelloAutotest.Selectors;
 using TrelloAutotests;
 using TrelloAutotests.Pages;
@@ -13,8 +12,6 @@ namespace TrelloAutotest.Pages
         public void CreateBoard(string BoardName)
         {
             Wait.Until(d => Driver.DriverInstance.FindElements(Selectors.BoardTitleInput).Any());
-
-            var driver = Driver.DriverInstance;
 
             driver.FindElement(Selectors.BoardTitleInput).SendKeys(BoardName);
             driver.FindElement(Selectors.BoardCreateButton).Click();

@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using System.Linq;
+﻿using System.Linq;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
@@ -10,10 +9,10 @@ namespace TrelloAutotest.Pages
     {
         public void ConfirmDelete()
         {
-            driver.FindElement(By.ClassName("js-delete")).Click();
+            driver.FindElement(BaseSelectors.DeleteButton).Click();
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
         }
 
-        public bool IsBoardDeleted() => driver.FindElements(By.ClassName("js-react-root")).Any(x => x.Text.Contains("Tablicy nie znaleziono."));
+        public bool IsBoardDeleted() => driver.FindElements(BaseSelectors.DeletedButtonHeader).Any(x => x.Text.Contains("Tablicy nie znaleziono."));
     }
 }

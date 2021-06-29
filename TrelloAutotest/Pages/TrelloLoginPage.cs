@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+﻿using TrelloAutotest.Selectors;
 
 namespace TrelloAutotests.Pages
 {
@@ -6,10 +6,10 @@ namespace TrelloAutotests.Pages
     {
         public void Login(User user)
         {
-            driver.FindElement(By.Id("user")).SendKeys(user.Username);
-            driver.FindElement(By.Id("login")).Click();
-            driver.FindElement(By.Id("password")).SendKeys(user.Password);
-            driver.FindElement(By.Id("login-submit")).Click();
+            driver.FindElement(LoginConst.User).SendKeys(user.Username);
+            driver.FindElement(LoginConst.Login).Click();
+            driver.FindElement(LoginConst.Password).SendKeys(user.Password);
+            driver.FindElement(LoginConst.LoginButton).Click();
         }
     }
 }

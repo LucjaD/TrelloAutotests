@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using System.Linq;
+﻿using System.Linq;
 using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
 
@@ -18,7 +17,7 @@ namespace TrelloAutotest.Pages
 
         public bool IsListCreated(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
 
-        public bool IsListDeleted(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
+        //public bool IsListDeleted(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
 
         public void DeleteList(string listName)
         {

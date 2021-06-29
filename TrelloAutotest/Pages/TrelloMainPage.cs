@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using System.Linq;
+﻿using System.Linq;
 using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
 
