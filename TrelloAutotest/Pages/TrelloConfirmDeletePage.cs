@@ -1,9 +1,10 @@
 ﻿using System.Linq;
+using TrelloAutotest.Messages;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
-    using BaseSelectors = Selectors.BaseConst;
+    using BaseSelectors = Selectors.BaseSelectors;
 
     public class TrelloConfirmDeletePage : BasePage
     {
@@ -13,6 +14,6 @@ namespace TrelloAutotest.Pages
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
         }
 
-        public bool IsBoardDeleted() => driver.FindElements(BaseSelectors.DeletedButtonHeader).Any(x => x.Text.Contains("Tablicy nie znaleziono."));
+        public bool IsBoardDeleted() => driver.FindElements(BaseSelectors.DeletedButtonHeader).Any(x => x.Text.Contains(Message.DeletedBoard));
     }
 }

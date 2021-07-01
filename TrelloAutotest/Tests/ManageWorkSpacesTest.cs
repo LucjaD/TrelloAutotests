@@ -7,19 +7,24 @@ namespace TrelloAutotest.Tests
 {
     class ManageWorkSpacesTest : BaseTest
     {
+        private const string _newWorkSpace = "Nowa przestrzeń";
+        private const string _workSpaceToDelete = "Przestrzeń do usunięcia";
+
         [Test]
         public void CreateWorkSpace()
         {
-            var trelloCreateWorkSpace = CreateWorkSpaceForTest("Nowa przestrzeń");
-            Assert.IsTrue(trelloCreateWorkSpace.IsWorkSpaceCreated("Nowa przestrzeń"));
+            var trelloCreateWorkSpace = CreateWorkSpaceForTest(_newWorkSpace);
+           
+            Assert.IsTrue(trelloCreateWorkSpace.IsWorkSpaceCreated(_newWorkSpace));
         }
 
         [Test]
         public void DeleteWorkSpace()
         {
-            var trelloCreateWorkSpace = CreateWorkSpaceForTest("Przestrzeń do usunięcia");
-            trelloCreateWorkSpace.DeleteWorkSpace("Przestrzeń do usunięcia");
-            Assert.IsFalse(trelloCreateWorkSpace.IsWorkSpaceDeleted("Przestrzeń do usunięcia"));
+            var trelloCreateWorkSpace = CreateWorkSpaceForTest(_workSpaceToDelete);
+            trelloCreateWorkSpace.DeleteWorkSpace(_workSpaceToDelete);
+           
+            Assert.IsFalse(trelloCreateWorkSpace.IsWorkSpaceDeleted(_workSpaceToDelete));
         }
 
         public TrelloCreateWorkSpacePage CreateWorkSpaceForTest(string _workSpaceName)

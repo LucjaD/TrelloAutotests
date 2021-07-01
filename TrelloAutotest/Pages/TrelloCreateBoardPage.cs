@@ -5,7 +5,7 @@ using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
-    using Selectors = BoardConst;
+    using Selectors = BoardSelectors;
 
     class TrelloCreateBoardPage : BasePage
     {

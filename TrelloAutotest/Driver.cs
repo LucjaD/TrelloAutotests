@@ -7,7 +7,7 @@ namespace TrelloAutotests
     {
         private static IWebDriver _driver;
 
-        public static IWebDriver DriverInstance { get => _driver; }
+        public static IWebDriver DriverInstance  => _driver; 
 
         public static void StartBrowser() => _driver = new FirefoxDriver();
 

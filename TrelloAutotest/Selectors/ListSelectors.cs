@@ -2,9 +2,9 @@
 
 namespace TrelloAutotest.Selectors
 {
-    public static class ListConst
+    public static class ListSelectors
     {
-        public static By CreateList = By.XPath("//span[contains(text(), 'Dodaj ') and contains(text(), 'listę')]");
+        public static By CreateListButton = By.XPath("//span[contains(text(), 'Dodaj ') and contains(text(), 'listę')]");
         public static By ListNameInput = By.XPath("//input[@placeholder = 'Wprowadź tytuł listy']");
         public static By AddListButton = By.ClassName("mod-list-add-button");
 
@@ -13,5 +13,7 @@ namespace TrelloAutotest.Selectors
         public static By ListHeader = By.CssSelector(".list-header ");
         public static By ListActions = By.CssSelector("[aria-label='Akcje listy']");
         public static By ListArchive = By.XPath("//a[contains(text(),'Zarchiwizuj tę listę')]");
+
+        public static By AddCardButton = By.ClassName("open-card-composer");
     }
 }

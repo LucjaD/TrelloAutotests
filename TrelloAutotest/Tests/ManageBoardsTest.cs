@@ -9,28 +9,34 @@ namespace TrelloAutotest.Tests
         private const string _boardName = "Nowa tablica";
 
         [Test]
-        public void CreateNewBoard()
+        public void CreateNewBoardByPanel()
         {
             var trelloMainPage = new TrelloMainPage();
             var configureBoard = new TrelloCreateBoardPage();
             var boardPage = new TrelloBoardPage();
 
-            trelloMainPage.CreateNewBoard();
+            trelloMainPage.CreateNewBoardByPanel();
             configureBoard.CreateBoard(_boardName);
+
             Assert.IsTrue(boardPage.IsUrlCorrect(_boardName));
+            Assert.IsTrue(boardPage.IsBoardCreated());
+            Assert.IsTrue(boardPage.IsBoardMenuAvilable());
         }
 
         [Test]
-        public void CreateNewBoardButton()
+        public void CreateNewBoardByMenu()
         {
             var trelloMainPage = new TrelloMainPage();
             var configureBoard = new TrelloCreateBoardPage();
             var boardPage = new TrelloBoardPage();
 
             trelloMainPage.OpenCreateTab();
-            trelloMainPage.CreateNewBoardButton();
+            trelloMainPage.CreateNewBoardByMenu();
             configureBoard.CreateBoard(_boardName);
+
             Assert.IsTrue(boardPage.IsUrlCorrect(_boardName));
+            Assert.IsTrue(boardPage.IsBoardCreated());
+            Assert.IsTrue(boardPage.IsBoardMenuAvilable());
         }
 
         [Test]
@@ -41,11 +47,14 @@ namespace TrelloAutotest.Tests
             var configureBoard = new TrelloCreateBoardPage();
             var confirmDeleteBoard = new TrelloConfirmDeletePage();
 
-            trelloMainPage.CreateNewBoard();
+            trelloMainPage.CreateNewBoardByPanel();
             configureBoard.CreateBoard("Tablica do usunięcia");
             boardPage.DeleteBoard();
             confirmDeleteBoard.ConfirmDelete();
+
             Assert.IsTrue(confirmDeleteBoard.IsBoardDeleted());
+            Assert.IsFalse(boardPage.IsBoardCreated());
+            Assert.IsFalse(boardPage.IsBoardMenuAvilable());
         }
     }
 }

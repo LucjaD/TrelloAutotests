@@ -6,33 +6,35 @@ namespace TrelloAutotest.Tests
 {
     class ManageListsTest : BaseTest
     {
-        private TrelloMainPage _trelloMainPage;
-        private TrelloListPage _trelloListPage;
         private const string _listName = "Lista";
+        private const string _boardName = "Tablica do listy";
+        private const string _listToDelete = "Lista do usunięcia";
 
         [Test]
         public void CreateList()
         {
-            _trelloMainPage = new TrelloMainPage();
-            _trelloListPage = new TrelloListPage();
+            var _trelloMainPage = new TrelloMainPage();
+            var _trelloListPage = new TrelloListPage();
 
-            _trelloMainPage.OpenBoard("Tablica do listy");
+            _trelloMainPage.OpenBoard(_boardName);
             _trelloListPage.CreateList(_listName);
 
             Assert.IsTrue(_trelloListPage.IsListCreated(_listName));
+            Assert.IsTrue(_trelloListPage.IsAddingCardPossible());
         }
 
         [Test]
         public void DeleteList()
         {
-            _trelloMainPage = new TrelloMainPage();
-            _trelloListPage = new TrelloListPage();
+            var _trelloMainPage = new TrelloMainPage();
+            var _trelloListPage = new TrelloListPage();
 
-            _trelloMainPage.OpenBoard("Tablica do listy");
-            _trelloListPage.CreateList("Lista do usunięcia");
-            _trelloListPage.DeleteList("Lista do usunięcia");
+            _trelloMainPage.OpenBoard(_boardName);
+            _trelloListPage.CreateList(_listToDelete);
+            _trelloListPage.DeleteList(_listToDelete);
 
-            Assert.IsFalse(_trelloListPage.IsListCreated("Lista do usunięcia"));
+            Assert.IsFalse(_trelloListPage.IsListCreated(_listToDelete));
+            Assert.IsFalse(_trelloListPage.IsAddingCardPossible());
         }
     }
 }
