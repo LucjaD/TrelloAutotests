@@ -20,7 +20,6 @@ namespace TrelloAutotest.Tests
             _trelloListPage.CreateList(_listName);
 
             Assert.IsTrue(_trelloListPage.IsListCreated(_listName));
-            Assert.IsTrue(_trelloListPage.IsAddingCardPossible());
         }
 
         [Test]
@@ -34,7 +33,6 @@ namespace TrelloAutotest.Tests
             _trelloListPage.DeleteList(_listToDelete);
 
             Assert.IsFalse(_trelloListPage.IsListCreated(_listToDelete));
-            Assert.IsFalse(_trelloListPage.IsAddingCardPossible());
         }
     }
 }

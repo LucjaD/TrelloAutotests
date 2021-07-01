@@ -18,8 +18,6 @@ namespace TrelloAutotest.Pages
 
         public bool IsListCreated(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
 
-        public bool IsAddingCardPossible() => driver.FindElements(Selectors.AddCardButton).Any(x => x.Text.Contains(Message.AddCardText));
-
         public void DeleteList(string listName)
         {
             driver.FindElements(Selectors.ListHeader)
