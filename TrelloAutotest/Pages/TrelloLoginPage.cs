@@ -4,7 +4,6 @@ using TrelloAutotest.Selectors;
 
 namespace TrelloAutotests.Pages
 {
-    using Selectors = LoginSelectors;
     class TrelloLoginPage : BasePage
     {
         public void Login(User user)
@@ -17,7 +16,7 @@ namespace TrelloAutotests.Pages
 
         public bool IsPasswordCorrect() => driver.FindElements(BaseSelectors.IncorrectLoginPanel).Any();
 
-        public bool DoesUserExists() => driver.FindElements(Selectors.ErrorPanel).Any(x => x.Text.Contains(Message.WrongUserMessage));
+        public bool DoesUserExists() => driver.FindElements(LoginSelectors.ErrorPanel).Any(x => x.Text.Contains(MessageText.AccountDoesNotExists));
 
     }
 }

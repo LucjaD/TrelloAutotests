@@ -5,26 +5,24 @@ using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
-    using Selectors = ListSelectors;
-
     class TrelloListPage : BasePage
     {
         public void CreateList(string listName)
         {
-            driver.FindElement(Selectors.CreateListButton).Click();
-            driver.FindElement(Selectors.ListNameInput).SendKeys(listName);
-            driver.FindElement(Selectors.AddListButton).Click();
+            driver.FindElement(ListSelectors.CreateListButton).Click();
+            driver.FindElement(ListSelectors.ListNameInput).SendKeys(listName);
+            driver.FindElement(ListSelectors.AddListButton).Click();
         }
 
-        public bool IsListCreated(string listName) => driver.FindElements(Selectors.ListHeaderName).Any(x => x.Text.Contains(listName));
+        public bool IsListCreated(string listName) => driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName));
 
         public void DeleteList(string listName)
         {
-            driver.FindElements(Selectors.ListHeader)
+            driver.FindElements(ListSelectors.ListHeader)
                 .First(x => x.Text.Contains(listName))
-                .FindElement(Selectors.ListActions)
+                .FindElement(ListSelectors.ListActions)
                 .Click();
-            driver.FindElement(Selectors.ListArchive).Click();
+            driver.FindElement(ListSelectors.ListArchive).Click();
         }
     }
 }

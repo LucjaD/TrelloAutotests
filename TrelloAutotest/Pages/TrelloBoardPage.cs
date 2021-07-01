@@ -12,7 +12,7 @@ namespace TrelloAutotest.Pages
     {
         public TrelloBoardPage() => Wait.Until(d => driver.FindElements(Selectors.BoardHeader).Any());
 
-        public void OpenBoardMenu() => driver.FindElements(By.TagName("a")).First(x => x.Text.Contains(Message.MenuButton)).Click();
+        public void OpenBoardMenu() => driver.FindElements(By.TagName("a")).First(x => x.Text.Contains(MessageText.ShowMenu)).Click();
         
         public bool IsLoginCorrect() => driver.FindElements(Selectors.BoardHeader).Any();
 
