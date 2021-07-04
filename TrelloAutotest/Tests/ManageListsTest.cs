@@ -13,26 +13,20 @@ namespace TrelloAutotest.Tests
         [Test]
         public void CreateList()
         {
-            var _trelloMainPage = new TrelloMainPage();
-            var _trelloListPage = new TrelloListPage();
-
-            _trelloMainPage.OpenBoard(_boardName);
-            _trelloListPage.CreateList(_listName);
-
-            Assert.IsTrue(_trelloListPage.IsListCreated(_listName));
+              TrelloMainPage.
+                OpenBoard(_boardName).
+                CreateList(_listName).
+                IsListCreated(_listName, true);
         }
 
         [Test]
         public void DeleteList()
         {
-            var _trelloMainPage = new TrelloMainPage();
-            var _trelloListPage = new TrelloListPage();
-
-            _trelloMainPage.OpenBoard(_boardName);
-            _trelloListPage.CreateList(_listToDelete);
-            _trelloListPage.DeleteList(_listToDelete);
-
-            Assert.IsFalse(_trelloListPage.IsListCreated(_listToDelete));
+            TrelloMainPage.
+               OpenBoard(_boardName).
+               CreateList(_listToDelete).
+               DeleteList(_listToDelete).
+               IsListCreated(_listToDelete, false);
         }
     }
 }

@@ -1,28 +1,39 @@
-﻿using System.Linq;
+﻿using NUnit.Framework;
+using System.Linq;
 using TrelloAutotest.Messages;
 using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
-    class TrelloListPage : BasePage
+    public class TrelloListPage : BasePage
     {
-        public void CreateList(string listName)
+        public TrelloListPage CreateList(string listName)
         {
             driver.FindElement(ListSelectors.CreateListButton).Click();
             driver.FindElement(ListSelectors.ListNameInput).SendKeys(listName);
             driver.FindElement(ListSelectors.AddListButton).Click();
+
+            return this;
         }
 
-        public bool IsListCreated(string listName) => driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName));
+        public TrelloListPage IsListCreated(string listName, bool assertFlag)
+        {
+            if (assertFlag) Assert.IsTrue(driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
+            else Assert.IsFalse(driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
 
-        public void DeleteList(string listName)
+            return this;
+        }
+
+        public TrelloListPage DeleteList(string listName)
         {
             driver.FindElements(ListSelectors.ListHeader)
                 .First(x => x.Text.Contains(listName))
                 .FindElement(ListSelectors.ListActions)
                 .Click();
             driver.FindElement(ListSelectors.ListArchive).Click();
+
+            return this;
         }
     }
 }

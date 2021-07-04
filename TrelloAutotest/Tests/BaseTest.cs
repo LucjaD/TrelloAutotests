@@ -1,27 +1,37 @@
 ﻿using NUnit.Framework;
 using TrelloAutotest;
+using TrelloAutotest.Pages;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotests.Tests
 {
     public class BaseTest
-    {        
+    {
+        protected TrelloMainPage TrelloMainPage;
+        protected TrelloLoginPage TrelloLoginPage;
+
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
-            Driver.StartBrowser();
+            StartBrowser();
+            var trelloWelcomePage = new TrelloWelcomePage();
+            trelloWelcomePage.LoginButton.Click();
 
-            var _trelloWelcomePage = new TrelloWelcomePage();
-            _trelloWelcomePage.LoginButton.Click();
+            TrelloLoginPage = new TrelloLoginPage();
 
-            var _trelloLoginPage = new TrelloLoginPage();
-            _trelloLoginPage.Login(Users.CorrectTestUser);
+            TrelloLoginPage.EnterUserName(Users.CorrectTestUser);
+            TrelloMainPage = TrelloLoginPage.Login(Users.CorrectTestUser);
         }
 
         [TearDown]
         public void TearDown()
         {
             Driver.QuitBrowser();
+        }
+
+        public void StartBrowser()
+        {
+            Driver.StartBrowser();
         }
     }
 }

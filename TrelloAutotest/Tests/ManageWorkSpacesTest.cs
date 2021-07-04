@@ -13,31 +13,22 @@ namespace TrelloAutotest.Tests
         [Test]
         public void CreateWorkSpace()
         {
-            var trelloCreateWorkSpace = CreateWorkSpaceForTest(_newWorkSpace);
-           
-            Assert.IsTrue(trelloCreateWorkSpace.IsWorkSpaceCreated(_newWorkSpace));
+            TrelloMainPage.
+                 OpenCreateTab().
+                 CreateWorkSpace().
+                 CreateNewWorkSpace("operations", _newWorkSpace).
+                 IsWorkSpaceCreated(_newWorkSpace);
         }
 
         [Test]
         public void DeleteWorkSpace()
-        {
-            var trelloCreateWorkSpace = CreateWorkSpaceForTest(_workSpaceToDelete);
-            trelloCreateWorkSpace.DeleteWorkSpace(_workSpaceToDelete);
-           
-            Assert.IsFalse(trelloCreateWorkSpace.IsWorkSpaceDeleted(_workSpaceToDelete));
-        }
-
-        public TrelloCreateWorkSpacePage CreateWorkSpaceForTest(string _workSpaceName)
-        {
-            var trelloMainPage = new TrelloMainPage();
-
-            trelloMainPage.OpenCreateTab();
-            trelloMainPage.CreateWorkSpace();
-
-            var trelloCreateWorkSpace = new TrelloCreateWorkSpacePage();
-
-            trelloCreateWorkSpace.CreateNewWorkSpace("operations", _workSpaceName);
-            return trelloCreateWorkSpace;
+        { 
+            TrelloMainPage.
+                 OpenCreateTab().
+                 CreateWorkSpace().
+                 CreateNewWorkSpace("operations", _workSpaceToDelete).
+                 DeleteWorkSpace(_workSpaceToDelete).
+                 IsWorkSpaceDeleted(_workSpaceToDelete);
         }
     }
 }
