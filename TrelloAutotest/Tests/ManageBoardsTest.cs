@@ -11,41 +11,37 @@ namespace TrelloAutotest.Tests
         [Test]
         public void CreateNewBoardByPanel()
         {
-            var trelloMainPage = new TrelloMainPage();
-
-            trelloMainPage.
-                CreateNewBoardByPanel().
-                CreateBoard(_boardName).
-                IsUrlCorrect(_boardName).
-                IsBoardCreated(true).
-                IsBoardMenuAvilable(true);
+            TrelloMainPage
+                .CreateNewBoardByPanel()
+                .CreateBoard(_boardName)
+                .ValidateUrl(_boardName)
+                .ValidateBoardCreating(true)
+                .ValidateBoardMenu(true);
         }
 
         [Test]
         public void CreateNewBoardByMenu()
         {
-            var trelloMainPage = new TrelloMainPage();
-
-            trelloMainPage.
-               OpenCreateTab().
-               CreateNewBoardByMenu().
-               CreateBoard(_boardName).
-               IsUrlCorrect(_boardName).
-               IsBoardCreated(true).
-               IsBoardMenuAvilable(true);
+            TrelloMainPage
+               .OpenCreateTab()
+               .CreateNewBoardByMenu()
+               .CreateBoard(_boardName)
+               .ValidateUrl(_boardName)
+               .ValidateBoardCreating(true)
+               .ValidateBoardMenu(true);
         }
 
         [Test]
         public void DeleteBoard()
         {
-            TrelloMainPage.
-                CreateNewBoardByPanel().
-                CreateBoard("Tablica do usunięcia").
-                DeleteBoard().
-                ConfirmDelete().
-                IsBoardDeleted().
-                IsBoardCreated(false).
-                IsBoardMenuAvilable(false);
+            TrelloMainPage
+                .CreateNewBoardByPanel()
+                .CreateBoard("Tablica do usunięcia")
+                .DeleteBoard()
+                .ConfirmDelete()
+                .ValidateBoardDeleting()
+                .ValidateBoardCreating(false)
+                .ValidateBoardMenu(false);
         }
     }
 }

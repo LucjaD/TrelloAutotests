@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using TrelloAutotest.Pages;
-using TrelloAutotests;
 using TrelloAutotests.Pages;
 using TrelloAutotests.Tests;
 
@@ -21,12 +19,12 @@ namespace TrelloAutotest.Tests
         [Test]
         public void CorrectLogin()
         {
-            _trelloLoginPage.
-                EnterUserName(Users.CorrectTestUser).
-                DoesUserExists().
-                Login(Users.CorrectTestUser).
-                IsPasswordCorrect().
-                IsLoginCorrect();
+            _trelloLoginPage
+                .EnterUserName(Users.CorrectTestUser)
+                .ValidateUserExists()
+                .Login(Users.CorrectTestUser)
+                .ValidatePassword()
+                .ValidateLogin();
         }
     }
 }

@@ -17,10 +17,9 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloListPage IsListCreated(string listName, bool assertFlag)
+        public TrelloListPage ValidateListCreating(string listName, bool expectedResult)
         {
-            if (assertFlag) Assert.IsTrue(driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
-            else Assert.IsFalse(driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
+            Assert.AreEqual(expectedResult, driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
 
             return this;
         }

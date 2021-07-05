@@ -23,7 +23,7 @@ namespace TrelloAutotests.Pages
             return this;
         }
 
-        public TrelloLoginPage DoesUserExists()
+        public TrelloLoginPage ValidateUserExists()
         {
             Assert.IsFalse(driver.FindElements(LoginSelectors.ErrorPanel).Any(x => x.Text.Contains(MessageText.AccountDoesNotExists)));
             return this;

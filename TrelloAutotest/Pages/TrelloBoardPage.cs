@@ -11,33 +11,30 @@ namespace TrelloAutotest.Pages
     {
         public void OpenBoardMenu() => driver.FindElements(By.TagName("a")).First(x => x.Text.Contains(MessageText.ShowMenu)).Click();
 
-       
-
-        public TrelloBoardPage IsUrlCorrect(string BoardName)
+        public TrelloBoardPage ValidateUrl(string BoardName)
         {
             Wait.Until(d => driver.FindElements(BoardSelectors.BoardViewButton).Any());
 
-            var SplitName = BoardName.Contains(' ') ? BoardName.ToLower().Replace(' ', '-').TrimEnd('-') : BoardName.ToLower();
-            var url = TrimUrl(driver.Url);
+            var splitedName = (BoardName.Contains(' ') ? BoardName.Replace(' ', '-').TrimEnd('-') : BoardName).ToLower();
+            var url = GetBoardNameUrl(driver.Url);
 
-            Assert.IsTrue(url == (SplitName));
+            Assert.IsTrue(url == splitedName);
             return this;
         }
 
-        public string TrimUrl(string Url) => Url.Split('/').Last();
+        private string GetBoardNameUrl(string Url) => Url.Split('/').Last();
 
-        public TrelloBoardPage IsBoardCreated(bool assertFlag)
+        public TrelloBoardPage ValidateBoardCreating(bool expectedResult)
         {
+            Assert.AreEqual(expectedResult, driver.FindElements(BoardSelectors.BoardViewButton).Any());
 
-            if (assertFlag) Assert.IsTrue(driver.FindElements(BoardSelectors.BoardViewButton).Any());
-            else Assert.IsFalse(driver.FindElements(BoardSelectors.BoardViewButton).Any());
             return this;
         }
 
-        public TrelloBoardPage IsBoardMenuAvilable(bool assertFlag)
+        public TrelloBoardPage ValidateBoardMenu(bool expectedResult)
         {
-            if (assertFlag) Assert.IsTrue(driver.FindElements(BoardSelectors.BoardMenu).Any());
-            else Assert.IsFalse(driver.FindElements(BoardSelectors.BoardMenu).Any());
+            Assert.AreEqual(expectedResult, driver.FindElements(BoardSelectors.BoardMenu).Any());
+
             return this;
         }
 
