@@ -22,7 +22,7 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloCreateWorkSpacePage VerifyWorkSpaceCreating(string workSpaceName)
+        public TrelloCreateWorkSpacePage VerifyWorkspaceWasCreated(string workSpaceName)
         {
             Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceTitle(workSpaceName)).Any());
 
@@ -50,7 +50,7 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloCreateWorkSpacePage VerifyWorkSpaceDeleting(string workSpaceName)
+        public TrelloCreateWorkSpacePage VerifyWorkSpaceWasDeleted(string workSpaceName)
         {
             Assert.IsFalse(
                 driver

@@ -61,13 +61,13 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloMainPage VerifyPassword()
+        public TrelloMainPage VerifyIncorrectLoginPanelExists()
         {
             Assert.IsFalse(driver.FindElements(BaseSelectors.IncorrectLoginPanel).Any());
             return this;
         }
 
-        public TrelloMainPage VerifyLogin()
+        public TrelloMainPage VerifyBoardHeaderExists()
         {
             Wait.Until(d => driver.FindElements(BoardSelectors.BoardHeader).Any());
             Assert.IsTrue(driver.FindElements(BoardSelectors.BoardHeader).Any());

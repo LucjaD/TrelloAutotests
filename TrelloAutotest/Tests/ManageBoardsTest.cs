@@ -40,7 +40,7 @@ namespace TrelloAutotest.Tests
                 .CreateBoard("Tablica do usunięcia")
                 .DeleteBoard()
                 .ConfirmDelete()
-                .VerifyBoardDeleting()
+                .VerifyBoardWasDeleted()
                 .VerifyBoardViewButtonNotExists()
                 .VerifyBoardMenuButtonNotExists();
         }

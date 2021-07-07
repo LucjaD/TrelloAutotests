@@ -24,8 +24,8 @@ namespace TrelloAutotest.Tests
                 .EnterUserName(Users.CorrectTestUser)
                 .VerifyUserExists()
                 .Login(Users.CorrectTestUser)
-                .VerifyPassword()
-                .VerifyLogin();
+                .VerifyIncorrectLoginPanelExists()
+                .VerifyBoardHeaderExists();
         }
     }
 }

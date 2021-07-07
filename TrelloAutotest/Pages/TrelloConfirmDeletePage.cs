@@ -16,7 +16,7 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloBoardPage VerifyBoardDeleting()
+        public TrelloBoardPage VerifyBoardWasDeleted()
         {
             Assert.IsTrue(driver.FindElements(BaseSelectors.DeletedButtonHeader).Any(x => x.Text.Contains(MessageText.BoardNotFound)));
          
