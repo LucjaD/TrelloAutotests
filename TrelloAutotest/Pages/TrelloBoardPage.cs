@@ -1,45 +1,67 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System.Linq;
 using TrelloAutotest.Messages;
+using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
 
 namespace TrelloAutotest.Pages
 {
-    using Selectors = Selectors.BoardSelectors;
-    using BaseSelectors = Selectors.BaseSelectors;
-
     public class TrelloBoardPage : BasePage
     {
-        public TrelloBoardPage() => Wait.Until(d => driver.FindElements(Selectors.BoardHeader).Any());
-
         public void OpenBoardMenu() => driver.FindElements(By.TagName("a")).First(x => x.Text.Contains(MessageText.ShowMenu)).Click();
-        
-        public bool IsLoginCorrect() => driver.FindElements(Selectors.BoardHeader).Any();
 
-        public bool IsUrlCorrect(string BoardName)
+        public TrelloBoardPage VerifyUrl(string BoardName)
         {
-            Wait.Until(d => driver.FindElements(Selectors.BoardViewButton).Any());
+            Wait.Until(d => driver.FindElements(BoardSelectors.BoardViewButton).Any());
 
-            var SplitName = BoardName.Contains(' ') ? BoardName.ToLower().Replace(' ', '-').TrimEnd('-') : BoardName.ToLower();
-            var url = TrimUrl(driver.Url);
+            var splittedName = (BoardName.Contains(' ') ? BoardName.Replace(' ', '-').TrimEnd('-') : BoardName).ToLower();
+            var url = GetBoardNameUrl(driver.Url);
 
-            return url == (SplitName);
+            Assert.IsTrue(url == splittedName);
+            return this;
         }
 
-        public string TrimUrl(string Url) => Url.Split('/').Last();
+        private string GetBoardNameUrl(string Url) => Url.Split('/').Last();
 
-        public bool IsBoardCreated() => driver.FindElements(Selectors.BoardViewButton).Any();
+        public TrelloBoardPage VerifyBoardViewButtonExists()
+        {
+            Assert.IsTrue(driver.FindElements(BoardSelectors.BoardViewButton).Any());
 
-        public bool IsBoardMenuAvilable() => driver.FindElements(Selectors.BoardMenu).Any();
+            return this;
+        }
 
-        public void DeleteBoard()
+        public TrelloBoardPage VerifyBoardViewButtonNotExists()
+        {
+            Assert.IsFalse(driver.FindElements(BoardSelectors.BoardViewButton).Any());
+
+            return this;
+        }
+
+        public TrelloBoardPage VerifyBoardMenuButtonExists()
+        {
+            Assert.IsTrue(driver.FindElements(BoardSelectors.BoardMenu).Any());
+
+            return this;
+        }
+
+        public TrelloBoardPage VerifyBoardMenuButtonNotExists()
+        {
+            Assert.IsFalse(driver.FindElements(BoardSelectors.BoardMenu).Any());
+
+            return this;
+        }
+
+        public TrelloConfirmDeletePage DeleteBoard()
         {
             OpenBoardMenu();
 
-            var MenuPanel = driver.FindElement(Selectors.BoardMenu);
-            MenuPanel.FindElement(Selectors.BoardMenuMore).Click();
-            driver.FindElement(Selectors.BoardCloseBoard).Click();
+            var MenuPanel = driver.FindElement(BoardSelectors.BoardMenu);
+            MenuPanel.FindElement(BoardSelectors.BoardMenuMore).Click();
+            driver.FindElement(BoardSelectors.BoardCloseBoard).Click();
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
+
+            return new TrelloConfirmDeletePage();
         }
     }
 }

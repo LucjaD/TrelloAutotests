@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using NUnit.Framework;
+using System.Linq;
 using TrelloAutotest.Messages;
 using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
@@ -7,12 +8,20 @@ namespace TrelloAutotest.Pages
 {
     public class TrelloConfirmDeletePage : BasePage
     {
-        public void ConfirmDelete()
+        public TrelloConfirmDeletePage ConfirmDelete()
         {
             driver.FindElement(BaseSelectors.DeleteButton).Click();
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
+
+            return this;
         }
 
-        public bool IsBoardDeleted() => driver.FindElements(BaseSelectors.DeletedButtonHeader).Any(x => x.Text.Contains(MessageText.BoardNotFound));
+        public TrelloBoardPage VerifyBoardWasDeleted()
+        {
+            Assert.IsTrue(driver.FindElements(BaseSelectors.DeletedButtonHeader).Any(x => x.Text.Contains(MessageText.BoardNotFound)));
+         
+            return new TrelloBoardPage();
+        }
     }
 }
+

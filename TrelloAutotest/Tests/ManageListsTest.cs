@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using TrelloAPI;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Tests;
 
@@ -9,30 +10,24 @@ namespace TrelloAutotest.Tests
         private const string _listName = "Lista";
         private const string _boardName = "Tablica do listy";
         private const string _listToDelete = "Lista do usunięcia";
-
+        
         [Test]
         public void CreateList()
         {
-            var _trelloMainPage = new TrelloMainPage();
-            var _trelloListPage = new TrelloListPage();
-
-            _trelloMainPage.OpenBoard(_boardName);
-            _trelloListPage.CreateList(_listName);
-
-            Assert.IsTrue(_trelloListPage.IsListCreated(_listName));
+              TrelloMainPage
+                .OpenBoard(_boardName)
+                .CreateList(_listName)
+                .VerifyListExists(_listName);
         }
 
         [Test]
         public void DeleteList()
         {
-            var _trelloMainPage = new TrelloMainPage();
-            var _trelloListPage = new TrelloListPage();
-
-            _trelloMainPage.OpenBoard(_boardName);
-            _trelloListPage.CreateList(_listToDelete);
-            _trelloListPage.DeleteList(_listToDelete);
-
-            Assert.IsFalse(_trelloListPage.IsListCreated(_listToDelete));
+            TrelloMainPage
+               .OpenBoard(_boardName)
+               .CreateList(_listToDelete)
+               .DeleteList(_listToDelete)
+               .VerifyListNotExists(_listToDelete);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Linq;
 using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
@@ -7,7 +8,7 @@ namespace TrelloAutotest.Pages
 {
     public class TrelloCreateWorkSpacePage : BasePage
     {
-        public void CreateNewWorkSpace(string element, string workSpaceName)
+        public TrelloCreateWorkSpacePage CreateNewWorkSpace(string element, string workSpaceName)
         {
             Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceNameInput).Any());
 
@@ -17,16 +18,19 @@ namespace TrelloAutotest.Pages
             driver.FindElement(WorkSpaceSelectors.WorkSpaceDescriptionInput).SendKeys("Tu się dzieją rzeczy");
             driver.FindElement(WorkSpaceSelectors.WorkSpaceContinueButton).Click();
             driver.FindElement(WorkSpaceSelectors.WorkSpaceLaterButton).Click();
+
+            return this;
         }
 
-        public bool IsWorkSpaceCreated(string workSpaceName)
+        public TrelloCreateWorkSpacePage VerifyWorkspaceWasCreated(string workSpaceName)
         {
             Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceTitle(workSpaceName)).Any());
 
-            return driver.FindElements(WorkSpaceSelectors.WorkSpaceTitle(workSpaceName)).Any();
+            Assert.IsTrue(driver.FindElements(WorkSpaceSelectors.WorkSpaceTitle(workSpaceName)).Any());
+            return this;
         }
 
-        public void DeleteWorkSpace(string workSpaceName)
+        public TrelloCreateWorkSpacePage DeleteWorkSpace(string workSpaceName)
         {
             driver.FindElement(WorkSpaceSelectors.HouseIcon).Click();
             Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceTab).Any());
@@ -35,14 +39,26 @@ namespace TrelloAutotest.Pages
                 .FirstOrDefault(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
             workSpaceList.FindElement(WorkSpaceSelectors.WorkSpaceSettings).Click();
 
-            Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceName)
-            .Any(x => x.Text.Contains(workSpaceName)));
+            Wait.Until(d => driver
+                    .FindElements(WorkSpaceSelectors.WorkSpaceName)
+                    .Any(x => x.Text.Contains(workSpaceName))
+            );
 
             driver.FindElement(WorkSpaceSelectors.WorkSpaceDeleteButton).Click();
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
+
+            return this;
         }
 
-        public bool IsWorkSpaceDeleted(string workSpaceName) => driver.FindElements(WorkSpaceSelectors.DeletedWorkSpace)
-                .Any(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
+        public TrelloCreateWorkSpacePage VerifyWorkSpaceWasDeleted(string workSpaceName)
+        {
+            Assert.IsFalse(
+                driver
+                    .FindElements(WorkSpaceSelectors.DeletedWorkSpace)
+                    .Any(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase))
+            );
+
+            return this;
+        }
     }
 }
