@@ -7,6 +7,7 @@ namespace TrelloAutotest.Tests
     class LoginTest : BaseTest
     {
         private TrelloLoginPage _trelloLoginPage;
+
         [SetUp]
         public override void SetUp()
         {
@@ -21,10 +22,10 @@ namespace TrelloAutotest.Tests
         {
             _trelloLoginPage
                 .EnterUserName(Users.CorrectTestUser)
-                .ValidateUserExists()
+                .VerifyUserExists()
                 .Login(Users.CorrectTestUser)
-                .ValidatePassword()
-                .ValidateLogin();
+                .VerifyPassword()
+                .VerifyLogin();
         }
     }
 }

@@ -11,29 +11,43 @@ namespace TrelloAutotest.Pages
     {
         public void OpenBoardMenu() => driver.FindElements(By.TagName("a")).First(x => x.Text.Contains(MessageText.ShowMenu)).Click();
 
-        public TrelloBoardPage ValidateUrl(string BoardName)
+        public TrelloBoardPage VerifyUrl(string BoardName)
         {
             Wait.Until(d => driver.FindElements(BoardSelectors.BoardViewButton).Any());
 
-            var splitedName = (BoardName.Contains(' ') ? BoardName.Replace(' ', '-').TrimEnd('-') : BoardName).ToLower();
+            var splittedName = (BoardName.Contains(' ') ? BoardName.Replace(' ', '-').TrimEnd('-') : BoardName).ToLower();
             var url = GetBoardNameUrl(driver.Url);
 
-            Assert.IsTrue(url == splitedName);
+            Assert.IsTrue(url == splittedName);
             return this;
         }
 
         private string GetBoardNameUrl(string Url) => Url.Split('/').Last();
 
-        public TrelloBoardPage ValidateBoardCreating(bool expectedResult)
+        public TrelloBoardPage VerifyBoardViewButtonExists()
         {
-            Assert.AreEqual(expectedResult, driver.FindElements(BoardSelectors.BoardViewButton).Any());
+            Assert.IsTrue(driver.FindElements(BoardSelectors.BoardViewButton).Any());
 
             return this;
         }
 
-        public TrelloBoardPage ValidateBoardMenu(bool expectedResult)
+        public TrelloBoardPage VerifyBoardViewButtonNotExists()
         {
-            Assert.AreEqual(expectedResult, driver.FindElements(BoardSelectors.BoardMenu).Any());
+            Assert.IsFalse(driver.FindElements(BoardSelectors.BoardViewButton).Any());
+
+            return this;
+        }
+
+        public TrelloBoardPage VerifyBoardMenuButtonExists()
+        {
+            Assert.IsTrue(driver.FindElements(BoardSelectors.BoardMenu).Any());
+
+            return this;
+        }
+
+        public TrelloBoardPage VerifyBoardMenuButtonNotExists()
+        {
+            Assert.IsFalse(driver.FindElements(BoardSelectors.BoardMenu).Any());
 
             return this;
         }

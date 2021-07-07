@@ -17,7 +17,7 @@ namespace TrelloAutotest.Tests
                  .OpenCreateTab()
                  .CreateWorkSpace()
                  .CreateNewWorkSpace("operations", _newWorkSpace)
-                 .ValidateWorkSpaceCreating(_newWorkSpace);
+                 .VerifyWorkSpaceCreating(_newWorkSpace);
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace TrelloAutotest.Tests
                  .CreateWorkSpace()
                  .CreateNewWorkSpace("operations", _workSpaceToDelete)
                  .DeleteWorkSpace(_workSpaceToDelete)
-                 .ValidateWorkSpaceDeleting(_workSpaceToDelete);
+                 .VerifyWorkSpaceDeleting(_workSpaceToDelete);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloCreateWorkSpacePage ValidateWorkSpaceCreating(string workSpaceName)
+        public TrelloCreateWorkSpacePage VerifyWorkSpaceCreating(string workSpaceName)
         {
             Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceTitle(workSpaceName)).Any());
 
@@ -39,8 +39,10 @@ namespace TrelloAutotest.Pages
                 .FirstOrDefault(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
             workSpaceList.FindElement(WorkSpaceSelectors.WorkSpaceSettings).Click();
 
-            Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceName)
-            .Any(x => x.Text.Contains(workSpaceName)));
+            Wait.Until(d => driver
+                    .FindElements(WorkSpaceSelectors.WorkSpaceName)
+                    .Any(x => x.Text.Contains(workSpaceName))
+            );
 
             driver.FindElement(WorkSpaceSelectors.WorkSpaceDeleteButton).Click();
             driver.FindElement(BaseSelectors.ConfirmButton).Click();
@@ -48,12 +50,12 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloCreateWorkSpacePage ValidateWorkSpaceDeleting(string workSpaceName)
+        public TrelloCreateWorkSpacePage VerifyWorkSpaceDeleting(string workSpaceName)
         {
             Assert.IsFalse(
                 driver
-                .FindElements(WorkSpaceSelectors.DeletedWorkSpace)
-                .Any(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase))
+                    .FindElements(WorkSpaceSelectors.DeletedWorkSpace)
+                    .Any(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase))
             );
 
             return this;

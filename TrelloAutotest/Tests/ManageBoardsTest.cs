@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using TrelloAPI;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Tests;
 
@@ -14,9 +15,9 @@ namespace TrelloAutotest.Tests
             TrelloMainPage
                 .CreateNewBoardByPanel()
                 .CreateBoard(_boardName)
-                .ValidateUrl(_boardName)
-                .ValidateBoardCreating(true)
-                .ValidateBoardMenu(true);
+                .VerifyUrl(_boardName)
+                .VerifyBoardViewButtonExists()
+                .VerifyBoardMenuButtonExists();
         }
 
         [Test]
@@ -26,9 +27,9 @@ namespace TrelloAutotest.Tests
                .OpenCreateTab()
                .CreateNewBoardByMenu()
                .CreateBoard(_boardName)
-               .ValidateUrl(_boardName)
-               .ValidateBoardCreating(true)
-               .ValidateBoardMenu(true);
+               .VerifyUrl(_boardName)
+               .VerifyBoardViewButtonExists()
+               .VerifyBoardMenuButtonExists();
         }
 
         [Test]
@@ -39,9 +40,9 @@ namespace TrelloAutotest.Tests
                 .CreateBoard("Tablica do usunięcia")
                 .DeleteBoard()
                 .ConfirmDelete()
-                .ValidateBoardDeleting()
-                .ValidateBoardCreating(false)
-                .ValidateBoardMenu(false);
+                .VerifyBoardDeleting()
+                .VerifyBoardViewButtonNotExists()
+                .VerifyBoardMenuButtonNotExists();
         }
     }
 }

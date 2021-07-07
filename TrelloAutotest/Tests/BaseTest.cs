@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using TrelloAPI;
 using TrelloAutotest;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Pages;
@@ -28,7 +29,7 @@ namespace TrelloAutotests.Tests
         {
             Driver.QuitBrowser();
         }
-
+        
         public void StartBrowser()
         {
             Driver.StartBrowser();

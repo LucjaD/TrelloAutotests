@@ -12,11 +12,11 @@ namespace TrelloAutotest.Tests
         public void BoardSearch()
         {
             TrelloMainPage
-               .Search(_newBoardName)
+                .Search(_newBoardName)
                 .SelectSearchResult(_newBoardName)
-                .ValidateUrl(_newBoardName)
-                .ValidateBoardCreating(true)
-                .ValidateBoardMenu(true);
+                .VerifyUrl(_newBoardName)
+                .VerifyBoardViewButtonExists()
+                .VerifyBoardMenuButtonExists();
         }
     }
 }
