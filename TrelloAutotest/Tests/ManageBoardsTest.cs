@@ -44,5 +44,12 @@ namespace TrelloAutotest.Tests
                 .VerifyBoardViewButtonNotExists()
                 .VerifyBoardMenuButtonNotExists();
         }
+
+        [OneTimeTearDown]
+        public void DeleteCreatedBoards()
+        {
+            var DeleteBoardRequest = new DELETERequests();
+            DeleteBoardRequest.DeleteBoard(_boardName);
+        }
     }
 }

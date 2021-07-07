@@ -10,7 +10,16 @@ namespace TrelloAutotest.Tests
         private const string _listName = "Lista";
         private const string _boardName = "Tablica do listy";
         private const string _listToDelete = "Lista do usunięcia";
-        
+
+        [OneTimeSetUp]
+        public void CreateListBoard()
+        {
+            BaseRestClient.ClientConnection("https://api.trello.com/1/");
+
+            var POSTRequests = new POSTRequests();
+            POSTRequests.CreateBoard(_boardName);
+        }
+
         [Test]
         public void CreateList()
         {
@@ -28,6 +37,13 @@ namespace TrelloAutotest.Tests
                .CreateList(_listToDelete)
                .DeleteList(_listToDelete)
                .VerifyListNotExists(_listToDelete);
+        }
+
+        [OneTimeTearDown]
+        public void DeleteBoard()
+        {
+            var DeleteBoardRequest = new DELETERequests();
+            DeleteBoardRequest.DeleteBoard(_boardName);
         }
     }
 }

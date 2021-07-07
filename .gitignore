@@ -3,3 +3,7 @@
 ################################################################################
 
 /TrelloAutotest/bin/Debug/netcoreapp3.1
+/TrelloAutotests/obj
+/TrelloAutotest/obj
+/TrelloAPI/bin/Debug/netcoreapp3.1
+/TrelloAPI/obj

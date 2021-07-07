@@ -22,6 +22,8 @@ namespace TrelloAutotests.Tests
 
             TrelloLoginPage.EnterUserName(Users.CorrectTestUser);
             TrelloMainPage = TrelloLoginPage.Login(Users.CorrectTestUser);
+
+            BaseRestClient.ClientConnection("https://api.trello.com/1/");
         }
 
         [TearDown]
