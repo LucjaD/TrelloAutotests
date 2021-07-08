@@ -2,13 +2,20 @@
 using NUnit.Framework.Internal;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Tests;
+using TrelloAPI;
+
 
 namespace TrelloAutotest.Tests
 {
-    class ManageWorkSpacesTest : BaseTest
+    class CreateWorkspaceTest : BaseTest
     {
         private const string _newWorkSpace = "Nowa przestrzeń";
-        private const string _workSpaceToDelete = "Przestrzeń do usunięcia";
+
+        [OneTimeSetUp]
+        public void OneTimeSetUpSetUp()
+        {
+            BaseRestClient.ClientConnection("https://api.trello.com/1/");
+        }
 
         [Test]
         public void CreateWorkSpace()
@@ -20,15 +27,11 @@ namespace TrelloAutotest.Tests
                  .VerifyWorkspaceWasCreated(_newWorkSpace);
         }
 
-        [Test]
-        public void DeleteWorkSpace()
-        { 
-            TrelloMainPage
-                 .OpenCreateTab()
-                 .CreateWorkSpace()
-                 .CreateNewWorkSpace("operations", _workSpaceToDelete)
-                 .DeleteWorkSpace(_workSpaceToDelete)
-                 .VerifyWorkSpaceWasDeleted(_workSpaceToDelete);
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            var deleteWorkspaceRequest = new DELETERequests();
+            deleteWorkspaceRequest.DeleteWorkspace(_newWorkSpace);
         }
     }
 }

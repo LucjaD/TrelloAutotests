@@ -20,5 +20,6 @@ namespace TrelloAutotest.Selectors
         public static By WorkSpaceSettings = By.CssSelector("[data-test-id = 'home-team-settings-tab']");
         public static By WorkSpaceName = By.ClassName("tabbed-pane-header-details");
         public static By WorkSpaceDeleteButton = By.ClassName("quiet-button");
+        public static By WorkSpaceArrowIcon = By.CssSelector("[aria-label = 'DownIcon']");
     }
 }

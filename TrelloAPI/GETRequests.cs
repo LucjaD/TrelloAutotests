@@ -8,6 +8,7 @@ namespace TrelloAPI
 {
     public class GETRequests
     {
+        private GETRequests _GetRequest;
         public List<BoardProperties> GetBoardsList()
         {
             RestRequest request = new RestRequest($"/members/me/boards?key={APIUserData.CorrectTestUser.Key}&token={APIUserData.CorrectTestUser.Token}", Method.GET);
@@ -20,8 +21,25 @@ namespace TrelloAPI
 
         public BoardProperties GetSpecificBoard(string boardName)
         {
-            var GetAllBoardsRequest = new GETRequests();
-            return GetAllBoardsRequest.GetBoardsList().First(x => x.name == boardName);
+            _GetRequest = new GETRequests();
+            return _GetRequest.GetBoardsList().First(x => x.name == boardName);
+        }
+
+        public List<WorkspaceProperties> GetWorkspacesNames()
+        {
+            RestRequest getWorkspacesRequest = new RestRequest($"/Members/me/organizations?key={APIUserData.CorrectTestUser.Key}&token={APIUserData.CorrectTestUser.Token}", Method.GET);
+            IRestResponse restResponse = BaseRestClient.Response(getWorkspacesRequest);
+
+            var response = restResponse.Content;
+            var WorkspaceProperties = new WorkspaceProperties();
+
+            return WorkspaceProperties.GetWorkspacesFromJSON(response);
+        }
+
+        public WorkspaceProperties GetSpecificWorkspace(string workspaceName)
+        {
+            _GetRequest = new GETRequests();
+            return _GetRequest.GetWorkspacesNames().First(x => x.displayName == workspaceName);
         }
     }
 }

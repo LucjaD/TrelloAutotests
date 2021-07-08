@@ -5,9 +5,15 @@ using TrelloAutotests.Tests;
 
 namespace TrelloAutotest.Tests
 {
-    class ManageBoardsTest : BaseTest
+    class CreateBoardTest : BaseTest
     {
         private const string _boardName = "Nowa tablica";
+
+        [OneTimeSetUp]
+        public void OneTimeSetUpSetUp()
+        {
+            BaseRestClient.ClientConnection("https://api.trello.com/1/");
+        }
 
         [Test]
         public void CreateNewBoardByPanel()
@@ -32,24 +38,11 @@ namespace TrelloAutotest.Tests
                .VerifyBoardMenuButtonExists();
         }
 
-        [Test]
-        public void DeleteBoard()
-        {
-            TrelloMainPage
-                .CreateNewBoardByPanel()
-                .CreateBoard("Tablica do usunięcia")
-                .DeleteBoard()
-                .ConfirmDelete()
-                .VerifyBoardWasDeleted()
-                .VerifyBoardViewButtonNotExists()
-                .VerifyBoardMenuButtonNotExists();
-        }
-
         [OneTimeTearDown]
         public void DeleteCreatedBoards()
         {
-            var DeleteBoardRequest = new DELETERequests();
-            DeleteBoardRequest.DeleteBoard(_boardName);
+            var deleteBoardRequest = new DELETERequests();
+            deleteBoardRequest.DeleteBoard(_boardName);
         }
     }
 }

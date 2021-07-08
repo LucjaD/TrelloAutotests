@@ -5,14 +5,13 @@ using TrelloAutotests.Tests;
 
 namespace TrelloAutotest.Tests
 {
-    class ManageListsTest : BaseTest
+    public class CreateListTest : BaseTest
     {
         private const string _listName = "Lista";
         private const string _boardName = "Tablica do listy";
-        private const string _listToDelete = "Lista do usunięcia";
 
         [OneTimeSetUp]
-        public void CreateListBoard()
+        public void OneTimeSetUp()
         {
             BaseRestClient.ClientConnection("https://api.trello.com/1/");
 
@@ -27,16 +26,6 @@ namespace TrelloAutotest.Tests
                 .OpenBoard(_boardName)
                 .CreateList(_listName)
                 .VerifyListExists(_listName);
-        }
-
-        [Test]
-        public void DeleteList()
-        {
-            TrelloMainPage
-               .OpenBoard(_boardName)
-               .CreateList(_listToDelete)
-               .DeleteList(_listToDelete)
-               .VerifyListNotExists(_listToDelete);
         }
 
         [OneTimeTearDown]

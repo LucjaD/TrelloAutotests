@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using System;
 using System.Linq;
 using TrelloAutotest.Selectors;
 using TrelloAutotests.Pages;
@@ -31,10 +33,10 @@ namespace TrelloAutotest.Pages
             return new TrelloCreateWorkSpacePage();
         }
 
-        public TrelloListPage OpenBoard(string boardName)
+        public TrelloBoardPage OpenBoard(string boardName)
         {
             driver.FindElement(MainSelectors.BoardTitle(boardName)).Click();
-            return new TrelloListPage();
+            return new TrelloBoardPage();
         }
 
         public TrelloMainPage Search(string boardName)
@@ -72,6 +74,27 @@ namespace TrelloAutotest.Pages
             Wait.Until(d => driver.FindElements(BoardSelectors.BoardHeader).Any());
             Assert.IsTrue(driver.FindElements(BoardSelectors.BoardHeader).Any());
             return this;
+        }
+
+        public TrelloCreateWorkSpacePage DeleteWorkSpace(string workSpaceName)
+        {
+            Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceTab).Any());
+
+
+            var workSpaceList = driver.FindElements(WorkSpaceSelectors.WorkSpaceTab)
+                .FirstOrDefault(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
+            workSpaceList.FindElement(WorkSpaceSelectors.WorkSpaceArrowIcon).Click();
+            workSpaceList.FindElement(WorkSpaceSelectors.WorkSpaceSettings).Click();
+
+            Wait.Until(d => driver
+                    .FindElements(WorkSpaceSelectors.WorkSpaceName)
+                    .Any(x => x.Text.Contains(workSpaceName))
+            );
+
+            driver.FindElement(WorkSpaceSelectors.WorkSpaceDeleteButton).Click();
+            driver.FindElement(BaseSelectors.ConfirmButton).Click();
+
+            return new TrelloCreateWorkSpacePage();
         }
     }
 }
