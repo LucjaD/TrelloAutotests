@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using TrelloAPI;
 using TrelloAutotest;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Pages;

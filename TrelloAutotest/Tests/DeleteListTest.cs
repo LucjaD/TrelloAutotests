@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TrelloAPI;
 using TrelloAutotests.Tests;
 
@@ -15,11 +12,10 @@ namespace TrelloAutotest.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            BaseRestClient.ClientConnection("https://api.trello.com/1/");
+            BaseRestClient.ClientConnection(ConfigHelper.InitConfiguration()["ApiUrl"]);
 
-            var POSTRequests = new POSTRequests();
-            POSTRequests.CreateBoard(_boardName);
-            POSTRequests.CreateList(_boardName, _listToDelete);
+            Api.CreateBoard(_boardName);
+            Api.CreateList(_boardName,_listToDelete);
         }
 
         [Test]
@@ -34,8 +30,7 @@ namespace TrelloAutotest.Tests
         [OneTimeTearDown]
         public void DeleteBoard()
         {
-            var DeleteBoardRequest = new DELETERequests();
-            DeleteBoardRequest.DeleteBoard(_boardName);
+            Api.DeleteBoard(_boardName);
         }
     }
 }

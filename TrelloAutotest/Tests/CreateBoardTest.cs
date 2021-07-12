@@ -12,7 +12,7 @@ namespace TrelloAutotest.Tests
         [OneTimeSetUp]
         public void OneTimeSetUpSetUp()
         {
-            BaseRestClient.ClientConnection("https://api.trello.com/1/");
+            BaseRestClient.ClientConnection(ConfigHelper.InitConfiguration()["ApiUrl"]);
         }
 
         [Test]
@@ -41,8 +41,7 @@ namespace TrelloAutotest.Tests
         [OneTimeTearDown]
         public void DeleteCreatedBoards()
         {
-            var deleteBoardRequest = new DELETERequests();
-            deleteBoardRequest.DeleteBoard(_boardName);
+            Api.DeleteBoard(_boardName);
         }
     }
 }

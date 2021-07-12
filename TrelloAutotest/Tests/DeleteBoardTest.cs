@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TrelloAPI;
 using TrelloAutotests.Tests;
 
@@ -14,10 +11,9 @@ namespace TrelloAutotest.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            BaseRestClient.ClientConnection("https://api.trello.com/1/");
+            BaseRestClient.ClientConnection(ConfigHelper.InitConfiguration()["ApiUrl"]);
 
-            var POSTRequests = new POSTRequests();
-            POSTRequests.CreateBoard(_boardName);
+            Api.CreateBoard(_boardName);
         }
 
         [Test]
