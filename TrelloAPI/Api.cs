@@ -4,8 +4,8 @@
     {
         public static void CreateBoard(string boardName)
         {
-            var POSTRequests = new PostRequests();
-            POSTRequests.CreateBoard(boardName);
+            var PostRequests = new PostRequests();
+            PostRequests.CreateBoard(boardName);
         }
 
         public static void DeleteBoard(string boardName)
@@ -16,8 +16,8 @@
 
         public static void CreateWorkspace(string workspacedName)
         {
-            var POSTRequests = new PostRequests();
-            POSTRequests.CreateWorkSpace(workspacedName);
+            var PostRequests = new PostRequests();
+            PostRequests.CreateWorkSpace(workspacedName);
         }
 
         public static void DeleteWorkspace(string workspacedName)
@@ -28,8 +28,8 @@
 
         public static void CreateList(string boardName, string listName)
         {
-            var POSTRequests = new PostRequests();
-            POSTRequests.CreateList(boardName, listName);
+            var PostRequests = new PostRequests();
+            PostRequests.CreateList(boardName, listName);
         }
 
     }

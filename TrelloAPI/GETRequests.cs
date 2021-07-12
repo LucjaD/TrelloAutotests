@@ -16,8 +16,8 @@ namespace TrelloAPI
 
         public BoardProperties GetSpecificBoard(string boardName)
         {
-            var _GetRequest = new GetRequests();
-            return _GetRequest.GetBoardsList().First(x => x.Name == boardName);
+            var getRequest = new GetRequests();
+            return getRequest.GetBoardsList().First(x => x.Name == boardName);
         }
 
         public List<WorkspaceProperties> GetWorkspacesNames()
@@ -30,8 +30,8 @@ namespace TrelloAPI
 
         public WorkspaceProperties GetSpecificWorkspace(string workspaceName)
         {
-            var _GetRequest = new GetRequests();
-            return _GetRequest.GetWorkspacesNames().First(x => x.DisplayName == workspaceName);
+            var getRequest = new GetRequests();
+            return getRequest.GetWorkspacesNames().First(x => x.DisplayName == workspaceName);
         }
     }
 }

@@ -6,15 +6,15 @@ namespace TrelloAPI
     {
         public void DeleteBoard(string boardName)
         {
-            var _GETRequest = new GetRequests();
-            var deleteBoardRequest = CreateRequest("boards", _GETRequest.GetSpecificBoard(boardName).Id, Method.DELETE);
+            var getRequest = new GetRequests();
+            var deleteBoardRequest = CreateRequest("boards", getRequest.GetSpecificBoard(boardName).Id, Method.DELETE);
             BaseRestClient.Response(deleteBoardRequest);
         }
 
         public void DeleteWorkspace(string workspaceName)
         {
-            var _GETRequest = new GetRequests();
-            var deleteWorkspaceRequest =  CreateRequest("organizations", _GETRequest.GetSpecificWorkspace(workspaceName).Name, Method.DELETE);
+            var getRequest = new GetRequests();
+            var deleteWorkspaceRequest =  CreateRequest("organizations", getRequest.GetSpecificWorkspace(workspaceName).Name, Method.DELETE);
             BaseRestClient.Response(deleteWorkspaceRequest);
         }
     }
