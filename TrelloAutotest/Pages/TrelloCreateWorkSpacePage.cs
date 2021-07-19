@@ -30,26 +30,6 @@ namespace TrelloAutotest.Pages
             return this;
         }
 
-        public TrelloCreateWorkSpacePage DeleteWorkSpace(string workSpaceName)
-        {
-            driver.FindElement(WorkSpaceSelectors.HouseIcon).Click();
-            Wait.Until(d => driver.FindElements(WorkSpaceSelectors.WorkSpaceTab).Any());
-
-            var workSpaceList = driver.FindElements(WorkSpaceSelectors.WorkSpaceTab)
-                .FirstOrDefault(x => x.Text.Contains(workSpaceName, StringComparison.OrdinalIgnoreCase));
-            workSpaceList.FindElement(WorkSpaceSelectors.WorkSpaceSettings).Click();
-
-            Wait.Until(d => driver
-                    .FindElements(WorkSpaceSelectors.WorkSpaceName)
-                    .Any(x => x.Text.Contains(workSpaceName))
-            );
-
-            driver.FindElement(WorkSpaceSelectors.WorkSpaceDeleteButton).Click();
-            driver.FindElement(BaseSelectors.ConfirmButton).Click();
-
-            return this;
-        }
-
         public TrelloCreateWorkSpacePage VerifyWorkSpaceWasDeleted(string workSpaceName)
         {
             Assert.IsFalse(

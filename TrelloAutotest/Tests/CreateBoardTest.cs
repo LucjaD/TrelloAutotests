@@ -1,13 +1,19 @@
 ﻿using NUnit.Framework;
-using TrelloAPI;
+using TrelloApi;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Tests;
 
 namespace TrelloAutotest.Tests
 {
-    class ManageBoardsTest : BaseTest
+    class CreateBoardTest : BaseTest
     {
         private const string _boardName = "Nowa tablica";
+
+        [OneTimeSetUp]
+        public void OneTimeSetUpSetUp()
+        {
+            BaseRestClient.ClientConnection(ConfigHelper.InitConfiguration()["ApiUrl"]);
+        }
 
         [Test]
         public void CreateNewBoardByPanel()
@@ -32,17 +38,10 @@ namespace TrelloAutotest.Tests
                .VerifyBoardMenuButtonExists();
         }
 
-        [Test]
-        public void DeleteBoard()
+        [OneTimeTearDown]
+        public void DeleteCreatedBoards()
         {
-            TrelloMainPage
-                .CreateNewBoardByPanel()
-                .CreateBoard("Tablica do usunięcia")
-                .DeleteBoard()
-                .ConfirmDelete()
-                .VerifyBoardWasDeleted()
-                .VerifyBoardViewButtonNotExists()
-                .VerifyBoardMenuButtonNotExists();
+            Api.DeleteBoard(_boardName);
         }
     }
 }

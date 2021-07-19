@@ -1,5 +1,8 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using System.Configuration;
+using TrelloApi;
+using TrelloAutotest;
 
 namespace TrelloAutotests.Pages
 {
@@ -10,7 +13,7 @@ namespace TrelloAutotests.Pages
         
         public TrelloWelcomePage() : base()
         {
-            Driver.OpenPage("https://trello.com/pl");
+            Driver.OpenPage(ConfigHelper.InitConfiguration()["TestUrl"]);
         }
     }
 }

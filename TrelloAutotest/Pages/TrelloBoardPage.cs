@@ -63,5 +63,39 @@ namespace TrelloAutotest.Pages
 
             return new TrelloConfirmDeletePage();
         }
+
+        public TrelloBoardPage CreateList(string listName)
+        {
+            driver.FindElement(ListSelectors.CreateListButton).Click();
+            driver.FindElement(ListSelectors.ListNameInput).SendKeys(listName);
+            driver.FindElement(ListSelectors.AddListButton).Click();
+
+            return this;
+        }
+
+        public TrelloBoardPage VerifyListExists(string listName)
+        {
+            Assert.IsTrue(driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
+
+            return this;
+        }
+
+        public TrelloBoardPage VerifyListNotExists(string listName)
+        {
+            Assert.IsFalse(driver.FindElements(ListSelectors.ListHeaderName).Any(x => x.Text.Contains(listName)));
+
+            return this;
+        }
+
+        public TrelloBoardPage DeleteList(string listName)
+        {
+            driver.FindElements(ListSelectors.ListHeader)
+                .First(x => x.Text.Contains(listName))
+                .FindElement(ListSelectors.ListActions)
+                .Click();
+            driver.FindElement(ListSelectors.ListArchive).Click();
+
+            return this;
+        }
     }
 }
