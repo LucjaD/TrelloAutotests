@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace TrelloAPI
+namespace TrelloApi
 {
     public static class ConfigHelper
     {

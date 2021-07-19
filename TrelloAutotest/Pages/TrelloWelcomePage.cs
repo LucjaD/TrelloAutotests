@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System.Configuration;
-using TrelloAPI;
+using TrelloApi;
 using TrelloAutotest;
 
 namespace TrelloAutotests.Pages

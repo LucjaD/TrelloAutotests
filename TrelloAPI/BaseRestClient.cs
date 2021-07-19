@@ -1,6 +1,6 @@
 ﻿using RestSharp;
 
-namespace TrelloAPI
+namespace TrelloApi
 {
     public static class BaseRestClient
     {

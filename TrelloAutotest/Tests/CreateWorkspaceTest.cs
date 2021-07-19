@@ -2,7 +2,7 @@
 using NUnit.Framework.Internal;
 using TrelloAutotest.Pages;
 using TrelloAutotests.Tests;
-using TrelloAPI;
+using TrelloApi;
 
 namespace TrelloAutotest.Tests
 {

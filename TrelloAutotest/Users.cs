@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Configuration;
-using TrelloAPI;
+using TrelloApi;
 using TrelloAutotests;
 
 namespace TrelloAutotest

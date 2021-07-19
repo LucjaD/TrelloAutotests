@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TrelloAPI\TrelloAPI.csproj" />
+    <ProjectReference Include="..\TrelloAPI\TrelloApi.csproj" />
   </ItemGroup>
 
 </Project>

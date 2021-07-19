@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TrelloAPI
+namespace TrelloApi
 {
     public class BaseRequest
     {
@@ -14,14 +14,7 @@ namespace TrelloAPI
             var request = new RestRequest($"/{prefix}/{specificElement}", method);
             request.AddParameter("key", ApiUserData.CorrectTestUser.Key);
             request.AddParameter("token", ApiUserData.CorrectTestUser.Token);
-
-            if (parameters != null)
-            {
-                foreach (var item in parameters)
-                {
-                    request.AddParameter(item.Key, item.Value);
-                }
-            }
+            parameters?.ToList().ForEach(item => request.AddParameter(item.Key, item.Value));
 
             return request;
         }

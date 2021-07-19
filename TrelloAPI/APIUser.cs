@@ -1,4 +1,4 @@
-﻿namespace TrelloAPI
+﻿namespace TrelloApi
 {
     public class ApiUser
     {
